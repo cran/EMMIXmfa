@@ -92,7 +92,7 @@ for (i in 1 : g) {
 }
 
 A <- try(A1 %*% chol.inv(A2))
-if (class(A) == "try-error") {
+if (any(class(A) %in% "try-error")) {
   model <- "ill-conditioned or a singular matrix"
   class(model) <- "error"
   return(model)

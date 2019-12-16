@@ -72,7 +72,7 @@ if (sigma_type == 'common') {
   }
   B <- try(V %*% beta %*% solve(n*H + t(beta) %*% V %*% beta))
 
-  if (class(B) == 'try-error') {
+  if (any(class(B) %in% 'try-error')) {
     ERR <- "inversion of a singular matrix"
     class(ERR) <- "error"
     return(ERR)
@@ -98,7 +98,7 @@ if (sigma_type == "unique") {
       H <- diag(q) - t(beta) %*% B[,, i]
       tau_i <- sum(tau[,i])
       B2 <- try(solve(H * tau_i +  t(beta) %*% V %*% beta))
-      if (class(B2) == 'try-error') {
+      if (any(class(B2) %in% 'try-error')) {
         ERR <- "inversion of a singular matrix"
         class(ERR) <- "error"
         return(ERR)
@@ -126,7 +126,7 @@ if (sigma_type == "unique") {
       H <- diag(q) - t(beta) %*% B[,, i]
       tau_i <- sum(tau[,i])
       B2 <- try(solve(H * tau_i +  t(beta) %*% V %*% beta))
-      if (class(B2) == 'try-error') {
+      if (any(class(B2) == 'try-error')) {
         ERR <- "inversion of a singular matrix"
         class(ERR) <- "error"
         return(ERR)

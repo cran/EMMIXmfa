@@ -83,7 +83,8 @@ start_clust <- function(Y, g, init_clust, nkmeans, nrandom) {
 n <- nrow(Y)
 if (!is.null(init_clust)) {
 
-  if ((class(init_clust) == "factor") || (class(init_clust) == "numeric")) {
+  if (any(class(init_clust) %in% "factor") || 
+      any(class(init_clust) %in% "numeric")) {
     if (n != length(init_clust))
       stop("Length of init_clust must be equal to number of
                                          samples in the data")
@@ -92,7 +93,7 @@ if (!is.null(init_clust)) {
     init_clust <- matrix(init_clust, nrow=n, ncol=1)
   }
 
-  if (class(init_clust) == "matrix") {
+  if (class(init_clust) %in% "matrix") {
     if (n != dim(init_clust)[1])
       stop("Length of init_clust must be equal to number of
                                            samples in the data")

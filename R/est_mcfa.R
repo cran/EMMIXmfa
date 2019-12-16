@@ -5,8 +5,8 @@ n <- nrow(Y)
 
 init_para$logL <- do.call("loglike.mcfa", c(list(Y=Y), init_para))
 
-if ((class(init_para$logL) == "try-error") ||
-      (class(init_para$logL) == 'character')) {
+if (any(class(init_para$logL) %in% "try-error") ||
+      any(class(init_para$logL) %in% 'character')) {
 
   FIT <- paste('in computing the log-likelihood before EM-steps')
   class(FIT) <- "error"
@@ -18,7 +18,7 @@ for (niter in 1 : itmax) {
 
   FIT <- do.call('Mstep.mcfa', c(list(Y = Y), init_para))
 
-  if (class(FIT) == 'error') {
+  if (any(class(FIT) %in% 'error')) {
 
     FIT <- paste('in ', niter,
                    'iteration of the M-step:',
@@ -29,8 +29,8 @@ for (niter in 1 : itmax) {
 
   FIT$logL <- try(do.call('loglike.mcfa', c(list(Y = Y), FIT)))
 
-  if ((class(FIT$logL) == "try-error") ||
-        (class(FIT$logL) == 'character')) {
+  if (any(class(FIT$logL) %in% "try-error") ||
+        any(class(FIT$logL) %in% 'character')) {
 
     FIT <- paste('in computing the log-likelihood after the ', niter,
                    'th the M-step', FIT$logL, sep = '')

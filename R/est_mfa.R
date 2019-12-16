@@ -7,8 +7,8 @@ fit <- init_para
 loglikeNtau <- try(do.call('logL_tau.mfa', c(list(Y = Y), fit)),
                         silent = TRUE)
 
-if ((class(loglikeNtau) == "try-error") ||
-              (class(loglikeNtau) == 'character')) {
+if ((any(class(loglikeNtau) %in% "try-error")) ||
+              (any(class(loglikeNtau) %in% 'character'))) {
   FIT <- paste('in computing the log-likelihood before EM-steps')
   class(FIT) <- "error"
   return(FIT)
@@ -20,7 +20,7 @@ for (niter in 1 : itmax) {
 
   FIT <- do.call('Mstep.mfa', c(list(Y = Y), fit))
 
-  if (class(FIT) == 'error') {
+  if (any(class(FIT) %in% 'error')) {
     FIT <- paste('in ', niter,
                    'iteration of the M-step', FIT)
     class(FIT) <- "error"
@@ -30,8 +30,8 @@ for (niter in 1 : itmax) {
   loglikeNtau <- try(do.call('logL_tau.mfa', c(list(Y = Y), FIT)),
                                      silent = TRUE)
 
-  if ((class(loglikeNtau) == "try-error") ||
-                    (class(loglikeNtau) == 'character')) {
+  if ((any(class(loglikeNtau) %in% "try-error")) ||
+              (any(class(loglikeNtau) %in% 'character'))) {
     FIT <- paste('in computing the log-likelihood after the ', niter,
                    'th the M-step', FIT$logL, sep = '')
     class(FIT) <- "error"
@@ -40,7 +40,8 @@ for (niter in 1 : itmax) {
 
   FIT <- append(FIT, loglikeNtau)
   
-  if ((class(FIT$logL) == "NULL") || (class(FIT$logL) == 'character')) {
+  if ((any(class(FIT$logL) == "NULL")) || 
+      (any(class(FIT$logL) == 'character'))) {
 
     FIT <- paste('in computing the log-likelihood after the ', niter,
                      'th the M-step', FIT$logL, sep = '')

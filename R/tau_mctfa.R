@@ -13,12 +13,12 @@ inv_D_A <- sweep(A, 1, diag(inv_D), '*')
 for(i in 1 : g) {
   inv_O <- try(chol.inv(chol.inv(omega[,, i]) +
                          t(inv_D_A) %*% A), silent = TRUE)
-  if (class(inv_O) == "try-error")
+  if (any(class(inv_O) %in% "try-error"))
     return(loglike <-
       paste('Ill-conditioned or singular Sigma[,', i, ']'))
 
   inv_S <- try(inv_D - inv_D_A %*% inv_O %*% t(inv_D_A), silent = TRUE)
-  if (class(inv_S) == "try-error") {
+  if (any(class(inv_S) %in% "try-error")) {
       return(loglike <- paste('Ill-conditioned or singular Sigma_',
                                                   i, sep = ''))
   }  

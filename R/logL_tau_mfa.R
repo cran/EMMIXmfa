@@ -16,12 +16,12 @@ if (sigma_type == 'common') {
 		inv_D <- diag(1 / diag(D))
     B_inv_D <- B * diag(inv_D)
     inv_O <- try(chol.inv(diag(q) +  t(B_inv_D) %*% B))
-		if (class(inv_O) == "try-error")
+		if (any(class(inv_O) %in% "try-error"))
        return(loglike =
                  paste('ill-conditioned or singular Sigma'))
 
 		inv_S <- try(inv_D - B_inv_D %*% inv_O %*% t(B_inv_D))
-    if (class(inv_S) == "try-error")
+    if (any(class(inv_S) %in% "try-error"))
        return(loglike =
                    paste('ill-conditioned or singular Sigma'))
 
@@ -40,12 +40,12 @@ if (sigma_type == 'common') {
     for(i in 1 : g) {
 			B_inv_D <- B[,, i] * diag(inv_D)
       inv_O <- try(chol.inv(diag(q) +  t(B_inv_D) %*% B[,, i]))
-      if (class(inv_O) == "try-error")
+      if (any(class(inv_O) %in% "try-error"))
         return(loglike =
                paste('ill-conditioned or singular Sigma[, ', i, ']'))
 
 			inv_S <- try(inv_D - B_inv_D %*% inv_O %*% t(B_inv_D))
-      if (class(inv_S) == "try-error")
+      if (any(class(inv_S) %in% "try-error"))
         return(loglike =
                    paste('ill-conditioned or singular Sigma[, ', i, ']'))
 
@@ -61,12 +61,12 @@ if (sigma_type == 'common') {
 			inv_D <- diag(1 / diag(D[ , , i]))
       B_inv_D <- B[,, i] * diag(inv_D)
       inv_O <- try(chol.inv(diag(q) +  t(B_inv_D) %*% B[,, i]))
-      if(class(inv_O) == "try-error")
+      if (any(class(inv_O) %in% "try-error"))
         return(loglike =
                paste('ill-conditioned or singular Sigma[,',i,']'))
 
 			inv_S <- try(inv_D - B_inv_D %*% inv_O %*% t(B_inv_D))
-      if(class(inv_S) == "try-error")
+      if (any(class(inv_S) %in% "try-error"))
          return(loglike = paste('ill-conditioned or singular Sigma[,',i,']'))
 
 			logdetS <- sum(log(diag(D[,, i]))) - log(det(inv_O))

@@ -6,8 +6,8 @@ n <- nrow(Y)
 loglike_and_tau <- try(do.call('logL_tau.mctfa',
                             c(list(Y = Y), init_para)), silent=TRUE)
 
-if ((class(loglike_and_tau) == "try-error") ||
-          (class(loglike_and_tau) == 'character')) {
+if ((any(class(loglike_and_tau) %in% "try-error")) ||
+              (any(class(loglike_and_tau) %in% 'character'))) {
   FIT <- paste('in computing the log-likelihood before EM-steps')
   class(FIT) <- "error"
   return(FIT)
@@ -16,7 +16,7 @@ if ((class(loglike_and_tau) == "try-error") ||
 # append the list  loglike_and_tau to init_para
 init_para <- append(init_para, loglike_and_tau)
 
-if (class(init_para$logL) == 'character') {
+if (any(class(init_para$logL) %in% 'character')) {
 
   FIT <- paste('in computing the log-likelihood before the EM-steps,',
                  init_para$logL)
@@ -27,7 +27,7 @@ if (class(init_para$logL) == 'character') {
 for (niter in 1 : itmax) {
 
   FIT <- do.call('Mstep.mctfa', c(list(Y=Y), init_para))
-  if (class(FIT) == 'error') {
+  if (any(class(FIT) %in% 'error')) {
      FIT <- paste('in ', niter,
                    'iteration of the M-step:',
                    FIT)
@@ -38,8 +38,8 @@ for (niter in 1 : itmax) {
   loglike_and_tau <- try(do.call('logL_tau.mctfa', c(list(Y = Y), FIT)),
                       silent = TRUE)
 
-  if ((class(loglike_and_tau) == "try-error") ||
-                    (class(loglike_and_tau) == 'character')) {
+  if (any((class(loglike_and_tau) %in% "try-error")) ||
+                    any((class(loglike_and_tau) %in% 'character'))) {
 
     FIT <- paste('in computing the log-likelihood after the ', niter,
                    'th the M-step:', FIT$logL, sep='')
@@ -50,7 +50,8 @@ for (niter in 1 : itmax) {
   # append the list  loglike_and_tau 
   FIT <- append(FIT, loglike_and_tau)
 
-  if ((class(FIT$logL)=="NULL")|| (class(FIT$logL) == 'character')) {
+  if (any((class(FIT$logL) %in% "NULL")) || 
+    any((class(FIT$logL) %in% 'character'))) {
 
     FIT <- paste('in computing the log-likelihood after the ', niter,
                    'th the M-step:', FIT$logL, sep='')

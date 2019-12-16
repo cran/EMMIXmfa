@@ -126,8 +126,8 @@ if (!requireNamespace("mvtnorm", quietly = TRUE)) {
   stop("rmix require mvtnorm package. Please `install.packages(mvtnorm)`")
 }
 
-if (!(any(class(model) == "mcfa") || any(class(model) == "mctfa") ||
-      any(class(model) == "mfa") || any(class(model) == "mtfa"))) {
+if (!(any(class(model) %in% "mcfa") || any(class(model) %in% "mctfa") ||
+      any(class(model) %in% "mfa") || any(class(model) %in% "mtfa"))) {
 
   stop("STOP:model must be of class mcfa, mctfa, mfa or mtfa")
 }
@@ -137,19 +137,19 @@ p <- dim(model$D)[1]
 sigma <- array(NA, c(p, p, ncomp))
 dat <- matrix(NA, nrow = n, ncol = p)
 
-if (any(class(model) == "mcfa")) {
+if (any(class(model) %in% "mcfa")) {
   dat <- rmcfa(n, model, ...)
 } 
 
-if (any(class(model) == "mctfa")) {
+if (any(class(model) %in% "mctfa")) {
   dat <- rmctfa(n, model, ...)
 } 
 
-if (any(class(model) == "mfa")) {
+if (any(class(model) %in% "mfa")) {
   dat <- rmfa(n, model, ...)
 } 
 
-if (any(class(model) == "mtfa")) {
+if (any(class(model) %in% "mtfa")) {
   dat <- rmtfa(n, model, ...)
 } 
 

@@ -2,11 +2,11 @@ factor_scores <- function(model, Y, ...) UseMethod("factor_scores")
 
 factor_scores.mcfa <- function(model, Y, tau = NULL, clust= NULL, ...) {
   
-  if (class(Y) == "data.frame") {
+  if (any(class(Y) %in% "data.frame")) {
     Y <- as.matrix(Y)
   }
   
-  if (class(Y) != "matrix")
+if (!any(class(Y) %in% "matrix"))
     stop("Y needs to be a numeric matrix")
   
   if ((!is.null(tau)) || (exists ("tau"))) {
@@ -23,11 +23,11 @@ factor_scores.mcfa <- function(model, Y, tau = NULL, clust= NULL, ...) {
 
 factor_scores.mctfa <- function(model, Y, tau = NULL, clust= NULL, ...) {
   
-  if (class(Y) == "data.frame") {
+  if (any(class(Y) %in% "data.frame")) {
     Y <- as.matrix(Y)
   }
   
-  if (class(Y) != "matrix")
+  if (!any(class(Y) %in% "matrix"))
     stop("Y needs to be a numeric matrix")
   
   if ((!is.null(tau)) || (exists ("tau"))) {
@@ -44,11 +44,11 @@ factor_scores.mctfa <- function(model, Y, tau = NULL, clust= NULL, ...) {
 
 factor_scores.mfa <- function(model, Y, tau = NULL, clust= NULL, ...) {
   
-  if (class(Y) == "data.frame") {
+  if (any(class(Y) %in% "data.frame")) {
     Y <- as.matrix(Y)
   }
   
-  if (class(Y) != "matrix")
+  if (!any(class(Y) %in% "matrix"))
     stop("Y needs to be a numeric matrix")
   
   if ((!is.null(tau)) || (exists ("tau"))) {
@@ -65,11 +65,11 @@ factor_scores.mfa <- function(model, Y, tau = NULL, clust= NULL, ...) {
 
 factor_scores.mtfa <- function(model, Y, tau = NULL, clust= NULL, ...) {
   
-  if (class(Y) == "data.frame") {
+  if (any(class(Y) %in% "data.frame")) {
     Y <- as.matrix(Y)
   }
   
-  if (class(Y) != "matrix")
+  if (!any(class(Y) %in% "matrix"))
     stop("Y needs to be a numeric matrix")
   
   if ((!is.null(tau)) || (exists ("tau"))) {

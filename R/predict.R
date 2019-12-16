@@ -4,20 +4,20 @@ predict.emmix <- function(object, Y, ...) {
    stop("Missing newdata Y.")
   }
   
-  if (any(class(object) == "mcfa")) {
+  if (any(class(object) %in% "mcfa")) {
      tau <- do.call("tau.mcfa", c(list(Y = Y), object))
   }
-  if (any(class(object) == "mctfa")) {
+  if (any(class(object) %in% "mctfa")) {
     tau <- do.call("tau.mctfa", c(list(Y = Y), object))
   }
-  if (any((class(object) == "mfa"))) {
+  if (any((class(object) %in% "mfa"))) {
     tau <- do.call("tau.mfa", c(list(Y = Y), object))
   }
-  if (any((class(object) == "mtfa"))) {
+  if (any((class(object) %in% "mtfa"))) {
     tau <- do.call("tau.mtfa", c(list(Y = Y), object))$tau
   }
-  if (!( any(class(object) == "mcfa") || any(class(object) == "mctfa") ||
-          any(class(object) == "mfa") || any(class(object) == "mtfa"))) {
+  if (!(any(class(object) %in% "mcfa") || any(class(object) %in% "mctfa") ||
+          any(class(object) %in% "mfa") || any(class(object) %in% "mtfa"))) {
 
     stop("STOP:object must be of class mcfa, mctfa, mfa or mtfa")
   } else {

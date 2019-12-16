@@ -5,7 +5,7 @@ print.emmix <- function(x, ...) {
   cat("\nCoefficients: \n")
   cat("pi_i : ", round(x$pivec, 3), "\n\n")
 
-  if ((any(class(x) == "mfa") || any(class(x) == "mtfa"))) {
+  if ((any(class(x) %in% "mfa") || any(class(x) %in% "mtfa"))) {
     for(j in 1 : x$g) {
       cat("mu_", j, ":\n", sep="")
       print(x$mu[, j])
@@ -36,13 +36,13 @@ print.emmix <- function(x, ...) {
       }
     }
 
-    if(any((class(x) == "mtfa"))) {
+    if(any((class(x) %in% "mtfa"))) {
       cat("\n")
       cat("nu: \n", x$v, '\n')
     }
   }
 
-  if((any(class(x) == "mcfa") || any(class(x) == "mctfa"))) {
+  if((any(class(x) %in% "mcfa") || any(class(x) %in% "mctfa"))) {
 
     cat("A: \n")
     print(x$A)
@@ -64,7 +64,7 @@ print.emmix <- function(x, ...) {
     cat("\n")
     cat("diag D: \n", diag(x$D), "\n")
 
-    if(any((class(x) == "mctfa"))) {
+    if(any((class(x) %in% "mctfa"))) {
       cat("\n")
       cat("nu: \n", x$v, "\n")
     }
