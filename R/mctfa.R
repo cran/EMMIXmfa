@@ -12,7 +12,7 @@ ERR <- is_valid_args.mctfa(Y, g, q, itmax, nkmeans, nrandom, tol,
                            df_init, df_update, init_clust, init_para,
                            init_method, conv_measure, warn_messages)
 # return error is the arguments are mis-specified
-if (class(ERR) == "error") {
+if (is(ERR, "error")) {
 
   stop(unclass(ERR))
 } else {
@@ -45,7 +45,7 @@ if (!is.null(init_para)) {
   estd_model <- est.mctfa(init_para = init_para, Y = Y, itmax = itmax,
                           tol = tol, conv_measure = conv_measure)
 
-  if ((class(estd_model) == "mctfa")) {
+  if (is(estd_model, "mctfa")) {
     if (estd_model$logL > maxLOGL) {
       Hmodel <- estd_model
       maxLOGL <- Hmodel$logL
@@ -54,7 +54,7 @@ if (!is.null(init_para)) {
     #                 g, q,  estd_model$logL))
   }
 
-  if (class(estd_model) == "error") {
+  if (is(estd_model, "error")) {
     when <- paste("init_para")
     what <- estd_model
     warn_msg <- cbind(when, what)
@@ -111,7 +111,7 @@ if ((nkmeans != 0) || (nrandom != 0) || (!is.null(init_clust))) {
                                   initial_partitions[, ii],
                                   init_method = method_for_init), silent = TRUE)
 
-    if (class(init_model_para) == "try-error") {
+    if (is(init_model_para, "try-error")) {
       when <- paste("At start", ii)
       what <- "Failed to estimate initial parameters"
       warn_msg <- rbind(warn_msg, cbind(when, what))
@@ -127,7 +127,7 @@ if ((nkmeans != 0) || (nrandom != 0) || (!is.null(init_clust))) {
                             conv_measure = conv_measure)
 
     # keep the model with highest log-likelihood
-    if (class(estd_model) == "mctfa") {
+    if (is(estd_model, "mctfa")) {
       if (estd_model$logL > maxLOGL) {
         Hmodel <- estd_model
         maxLOGL <- Hmodel$logL
@@ -136,7 +136,7 @@ if ((nkmeans != 0) || (nrandom != 0) || (!is.null(init_clust))) {
       #                 g, q, ii, estd_model$logL, maxLOGL))
     }
 
-    if (class(estd_model) == "error") {
+    if (is(estd_model, "error")) {
       when <- paste("At start", ii)
       what <- estd_model
       warn_msg <- rbind(warn_msg, cbind(when, what))

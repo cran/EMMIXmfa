@@ -72,7 +72,7 @@ for (i in 1 : g) {
     fmin <- try(f(v.min))
     fmax <- try(f(v.max))
     if (class(fmin) == class(fmax)) {
-      if ((class(fmin) == "numeric") && is.finite(fmin) && is.finite(fmax)) {
+      if ((is(fmin, "numeric")) && is.finite(fmin) && is.finite(fmax)) {
         if (sign(fmin) == sign(fmax)) {
           if (abs(fmin) < abs(fmax)) {v[i] <- v.min} else {v[i] <- v.max}
         } else {

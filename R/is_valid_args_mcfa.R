@@ -112,7 +112,7 @@ if ((conv_measure != "diff") && (conv_measure != "ratio")) {
 	return(ERR)
 }
 
-if (class(warn_messages) != "logical") {
+if (!is(warn_messages, "logical")) {
   
   ERR <- "warn_messages must either be TRUE or FALSE'."
   class(ERR) <- "error"
@@ -133,10 +133,10 @@ is_valid_args.mctfa <- function(Y, g, q, itmax, nkmeans, nrandom,
 ERR <- is_valid_args.mcfa(Y, g, q, itmax, nkmeans, nrandom, tol,
                           init_clust, init_para, init_method,
                           conv_measure, warn_messages)
-if (class(ERR) == "error")
+if (is(ERR, "error"))
     return(ERR)
 
-if (class(df_update) != "logical") {
+if (!is(df_update, "logical")) {
   ERR <- "df_update is either TRUE or FALSE'."
   class(ERR) <- "error"
   return(ERR)

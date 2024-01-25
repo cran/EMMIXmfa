@@ -30,7 +30,7 @@ for(i in 1 : g) {
   }
 
   eig.list <- try(eigen(inv.Di.sqrt %*% Si %*% inv.Di.sqrt), TRUE)
-  if (class(eig.list) == "try-error")
+  if (is(eig.list, "try-error"))
     break
 
   H <- eig.list$vectors

@@ -1,8 +1,8 @@
 Package: EMMIXmfa
 Type: Package
 Title: Mixture Models with Component-Wise Factor Analyzers
-Version: 2.0.11
-Date: 2019-12-16
+Version: 2.0.14
+Date: 2024-01-24
 URL: https://github.com/suren-rathnayake/EMMIXmfa
 Author: Suren Rathnayake, Geoff McLachlan, David Peel, Jangsun Baek
 Maintainer: Suren Rathnayake <surenr@gmail.com>
@@ -21,9 +21,10 @@ Description: We provide functions to fit finite mixtures of multivariate normal 
     Baek J, McLachlan GJ, Flack LK (2010) <doi:10.1109/TPAMI.2009.149> 
     Baek J, McLachlan GJ (2011) <doi:10.1093/bioinformatics/btr112> 
     McLachlan GJ, Baek J, Rathnayake SI (2011) <doi:10.1002/9781119995678.ch9>.
+Depends: methods
 Suggests: mvtnorm, GGally, ggplot2
 License: GPL (>= 2)
 NeedsCompilation: yes
 Repository: CRAN
-Packaged: 2019-12-16 22:00:36 UTC; uqsratha
-Date/Publication: 2019-12-16 22:50:02 UTC
+Packaged: 2024-01-25 19:55:32 UTC; suren
+Date/Publication: 2024-01-25 20:30:02 UTC

@@ -37,15 +37,6 @@ observed data points in the \emph{q}-dimensional factor space.
 The MCFA would also provide a greater reduction in the number of
 parameters in the model.
 }
-\details{
-\tabular{ll}{
-Package: \tab EMMIXmfa\cr
-Type: \tab Package\cr
-Version: \tab 2.0.4\cr
-Date: \tab 2018-09-17\cr
-License: \tab GPL (>= 2)\cr
-}
-}
 \author{
 Suren Rathnayake, Geoffrey McLachlan, David Peel, Jangsun Baek
 }

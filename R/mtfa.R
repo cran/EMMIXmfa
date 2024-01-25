@@ -31,7 +31,7 @@ ERR <- is_valid_args.mtfa(Y, g, q, itmax, nkmeans, nrandom, tol, df_init,
 
 # if (class(ERR) == "error")
 #   stop(cat(ERR))
-if (class(ERR) == "error") {
+if (is(ERR, "error")) {
 
   stop(unclass(ERR))
 }
@@ -57,7 +57,7 @@ if (!is.null(init_para)) {
                            v = v, df_update = df_update,
                            conv_measure = conv_measure)
 
-  if (class(estd_model) == "mtfa") {
+  if (is(estd_model, "mtfa")) {
 
     if (estd_model$logL > max_log_like) {
         Hmodel <- estd_model
@@ -67,7 +67,7 @@ if (!is.null(init_para)) {
     #                   g, q,  estd_model$logL))
   }
 
-  if (class(estd_model) == "error") {
+  if (is(estd_model, "error")) {
     when <- paste("init_para")
     what <- estd_model
     warn_msg <- cbind(when, what)
@@ -101,7 +101,7 @@ if ((nkmeans!=0) || (nrandom!=0) || (!is.null(init_clust)))  {
                                                 initial_partitions[, ii],
                                                 sigma_type, D_type),
                                                 silent = TRUE)
-    if (class(init_model_para) == "try-error") {
+    if (is(init_model_para, "try-error")) {
       when <- paste("At start", ii)
       what <- "Failed to estimate initial parameters"
       warn_msg <- rbind(warn_msg, cbind(when, what))
@@ -115,8 +115,8 @@ if ((nkmeans!=0) || (nrandom!=0) || (!is.null(init_clust)))  {
                            v = df_init, df_update = df_update,
                            conv_measure = conv_measure)
 
-    if((class(estd_model) == "mtfa")) {
-      if (estd_model$logL > max_log_like){
+    if(is(estd_model, "mtfa")) {
+      if(estd_model$logL > max_log_like){
         Hmodel <- estd_model
         max_log_like <- Hmodel$logL
       }
@@ -125,7 +125,7 @@ if ((nkmeans!=0) || (nrandom!=0) || (!is.null(init_clust)))  {
   #                 g, q, ii, estd_model$logL, max_log_like))
     }
 
-    if(class(estd_model) == "error") {
+    if(is(estd_model, "error")) {
       when <- paste("At start", ii)
       what <- estd_model
       warn_msg <- rbind(warn_msg, cbind(when, what))
